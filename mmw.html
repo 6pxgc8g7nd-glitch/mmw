@@ -54,6 +54,7 @@
         .ink-input:focus {
             border-color: #a88a5d;
             box-shadow: 0 0 15px rgba(168, 138, 93, 0.3);
+            outline: none;
         }
 
         .gold-text {
@@ -94,11 +95,11 @@
         <div class="space-y-8">
             <!-- 數據概覽 -->
             <div class="grid grid-cols-2 gap-px bg-[#333]">
-                <div class="bg-[#1a1a1a] p-4">
+                <div class="bg-[#1a1a1a] p-4 text-center">
                     <span class="block text-[10px] text-gray-500 mb-1">心力上限</span>
                     <span class="text-2xl font-bold gold-text">550</span>
                 </div>
-                <div class="bg-[#1a1a1a] p-4">
+                <div class="bg-[#1a1a1a] p-4 text-center">
                     <span class="block text-[10px] text-gray-500 mb-1">回復頻率</span>
                     <span class="text-2xl font-bold gold-text">8 <span class="text-sm font-normal">分</span></span>
                 </div>
@@ -111,7 +112,7 @@
                     type="number" 
                     id="currentStamina" 
                     placeholder="肆佰" 
-                    class="w-full text-center text-5xl font-bold py-6 ink-input rounded-sm transition-all outline-none"
+                    class="w-full text-center text-5xl font-bold py-6 ink-input rounded-sm transition-all"
                     max="550"
                     min="0"
                     oninput="calculate()"
@@ -186,6 +187,7 @@
                 return;
             }
 
+            // 限制輸入範圍
             if (current > MAX_HEART) {
                 current = MAX_HEART;
                 input.value = MAX_HEART;
@@ -225,6 +227,7 @@
             document.getElementById('totalTimeStr').innerText = `${hours} 小時 ${mins} 分`;
             document.getElementById('fullTimeStr').innerText = dayText + `${hoursDisplay}:${minsDisplay}`;
             
+            // 計算當前進度（當前心力/最大心力）
             const percent = Math.round((current / MAX_HEART) * 100);
             document.getElementById('progressPercent').innerText = percent + '%';
             document.getElementById('progressBar').style.width = percent + '%';
